@@ -102,7 +102,10 @@ const AdminPage: React.FC = () => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'admin-data.csv'
+    const now = new Date()
+    const pad = (n: number) => String(n).padStart(2, '0')
+    const fileName = `admin-data_${pad(now.getDate())}-${pad(now.getMonth()+1)}-${now.getFullYear()}_${pad(now.getHours())}-${pad(now.getMinutes())}.csv`
+    a.download = fileName
     document.body.appendChild(a)
     a.click()
     a.remove()
