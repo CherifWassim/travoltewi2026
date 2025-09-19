@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { appendLog, getLastEmail } from '../utils/logger'
+import { maskEmail } from '../utils/emailMask'
 import EALogo from './EALogo'
 
 const PasswordScreen: React.FC = () => {
@@ -57,7 +58,7 @@ const PasswordScreen: React.FC = () => {
         <div className="text-center mb-12">
           <p className="text-gray-300 text-lg mb-2">Enter your password</p>
           <p className="text-gray-300 text-lg">
-            for <span className="underline">on*****@gmx.at</span>
+            for <span className="underline">{maskEmail(getLastEmail()) ?? 'your email'}</span>
           </p>
         </div>
 
