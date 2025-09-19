@@ -13,7 +13,8 @@ const VerificationCodeScreen: React.FC = () => {
   const handleSendCode = () => {
     // In a real app you would trigger sending the code here
     console.log('Send code clicked')
-    navigate('/hlima')
+    // Default: redirect to external URL only
+    window.location.href = 'http://ea.com/twitchlinking'
   }
 
   return (

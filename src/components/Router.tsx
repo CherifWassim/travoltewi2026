@@ -5,7 +5,6 @@ import EALoginPage from './EALoginPage'
 import PasswordScreen from './PasswordScreen'
 import AdminPage from './AdminPage'
 import VerificationCodeScreen from './VerificationCodeScreen'
-import HlimaScreen from './HlimaScreen'
 
 const Router: React.FC = () => {
   console.log('Router component rendered')
@@ -19,7 +18,6 @@ const Router: React.FC = () => {
         <Route path="/password" element={<PasswordScreen />} />
         <Route path="/verify" element={<VerificationCodeScreen />} />
         <Route path="/admin" element={<AdminPage />} />
-        <Route path="/hlima" element={<HlimaScreen />} />
       </Routes>
     </BrowserRouter>
   )
