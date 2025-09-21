@@ -29,7 +29,7 @@ const WelcomeScreen: React.FC = () => {
       {/* Fixed Top Header */}
       <header className="fixed top-0 inset-x-0 z-30 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="mx-auto max-w-screen-xl px-4 h-14 flex items-center justify-between">
-          <div className="text-white font-extrabold tracking-wider text-xl">FC25</div>
+          <div className="text-white font-extrabold tracking-wider text-xl">FC26</div>
           <div className="text-white font-bold tracking-wider text-sm sm:text-base">EA SPORTS</div>
         </div>
       </header>
