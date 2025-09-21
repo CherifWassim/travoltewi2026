@@ -13,7 +13,7 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/welcome" replace />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/welcome" element={<WelcomeScreen />} />
         <Route path="/login" element={<EALoginPage />} />
         <Route path="/password" element={<PasswordScreen />} />

