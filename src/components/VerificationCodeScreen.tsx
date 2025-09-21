@@ -35,7 +35,7 @@ const VerificationCodeScreen: React.FC = () => {
       {/* Main Content */}
       <div className="px-6 pt-8">
         {/* EA Logo */}
-        <div className="w-full h-24 mb-12">
+        <div className="w-full flex justify-center mb-12">
           <EALogo />
         </div>
 

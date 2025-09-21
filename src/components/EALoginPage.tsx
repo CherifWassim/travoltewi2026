@@ -27,7 +27,7 @@ const EALoginPage: React.FC = () => {
 
       {/* Main content */}
       <div className="px-6 pt-12 pb-8">
-        <div className="w-full h-20">
+        <div className="w-full flex justify-center">
           <EALogo />
         </div>
         

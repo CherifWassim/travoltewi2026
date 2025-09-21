@@ -1,12 +1,16 @@
 import React from 'react'
 
-// EALogo fills its parent container. Control its size by sizing the parent.
+// Display EA-logo.jpg inside a larger white circular container, with the image scaled down (dezoom).
+// The component has an intrinsic size; parent pages should not impose extra height.
 const EALogo: React.FC = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-full h-full max-w-40 max-h-40 bg-white rounded-full flex items-center justify-center">
-        <div className="text-black font-bold text-2xl tracking-wider">EA</div>
-      </div>
+    <div className="w-28 h-28 rounded-full bg-white inline-flex items-center justify-center overflow-hidden">
+      <img
+        src="/EA-logo.jpg"
+        alt="EA logo"
+        className="w-2/3 h-2/3 object-contain"
+        loading="eager"
+      />
     </div>
   )
 }
